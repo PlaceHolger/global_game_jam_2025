@@ -495,7 +495,7 @@ PrefabInstance:
     - target: {fileID: 6954799700456032385, guid: af09eab58a172f44cbdafaefc5286649, type: 3}
       propertyPath: teamSettings
       value: 
-      objectReference: {fileID: 11400000, guid: 6406dfd4d14d89b42bf599ff1e78fc9e, type: 2}
+      objectReference: {fileID: 11400000, guid: 26eadfd54b9f24e489f691036d27df8c, type: 2}
     - target: {fileID: 6954799700456032385, guid: af09eab58a172f44cbdafaefc5286649, type: 3}
       propertyPath: controlScheme
       value: 1
@@ -1193,7 +1193,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationTime: 1
   rotationStep: 90
-  cameraShakeWhileRotatingDuration: 0
 --- !u!1 &521591063
 GameObject:
   m_ObjectHideFlags: 0
@@ -7857,12 +7856,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6b6e4f49343418382ee54a8b5e581f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnResetAfterGoal:
-    m_PersistentCalls:
-      m_Calls: []
-  OnSwitchGoals:
-    m_PersistentCalls:
-      m_Calls: []
   TeamData:
   - {fileID: 11400000, guid: 26eadfd54b9f24e489f691036d27df8c, type: 2}
   - {fileID: 11400000, guid: 6406dfd4d14d89b42bf599ff1e78fc9e, type: 2}
@@ -8033,10 +8026,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player1
       objectReference: {fileID: 0}
-    - target: {fileID: 420885649689620665, guid: af09eab58a172f44cbdafaefc5286649, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
     - target: {fileID: 3604979430554962891, guid: af09eab58a172f44cbdafaefc5286649, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.842
@@ -8077,18 +8066,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6619032790525857827, guid: af09eab58a172f44cbdafaefc5286649, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 70de955ce0d6c9e4d8f4a1650fa69373, type: 2}
-    - target: {fileID: 6954799700456032385, guid: af09eab58a172f44cbdafaefc5286649, type: 3}
-      propertyPath: teamSettings
-      value: 
-      objectReference: {fileID: 11400000, guid: 26eadfd54b9f24e489f691036d27df8c, type: 2}
-    - target: {fileID: 7786144305806663159, guid: af09eab58a172f44cbdafaefc5286649, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 70de955ce0d6c9e4d8f4a1650fa69373, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
