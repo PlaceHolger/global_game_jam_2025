@@ -32,11 +32,19 @@ public class GgjController : MonoBehaviour
     private bool didDashPushHit;
     
     public LayerMask dashPushLayerMask;
+    
+    private float lastHitTime;
+    public float knockHitTime = 0.5f;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         UpdateColors();
+    }
+
+    public void OnBeingHit()
+    {
+        lastHitTime = Time.time;
     }
 
     void UpdateColors()
