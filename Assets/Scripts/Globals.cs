@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class Globals : MonoBehaviour
 {
@@ -77,6 +78,41 @@ public class Globals : MonoBehaviour
         else if (Input.GetKey(KeyCode.Alpha6))
         {
             FindAnyObjectByType<FieldMover2>().RotateY(false);
+        }
+
+        CheckIfDisableButtonPressed();
+    }
+    
+    private void CheckIfDisableButtonPressed()
+    {
+        bool anyDisableButtonPressed = Input.GetKeyDown(KeyCode.Alpha7) || Input.GetKeyDown(KeyCode.Alpha8) || Input.GetKeyDown(KeyCode.Alpha9) || Input.GetKeyDown(KeyCode.Alpha0);
+
+        if (anyDisableButtonPressed)
+        {
+            var players = GameObject.FindObjectsByType<GgjController>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            foreach (var player in players)
+            {
+                if (Input.GetKeyDown(KeyCode.Alpha7))
+                {
+                    if (player.controlScheme == GgjController.eInputDevice.KeyboardWASD)
+                        player.gameObject.SetActive(!player.gameObject.activeSelf);
+                }
+                else if (Input.GetKeyDown(KeyCode.Alpha8))
+                {
+                    if (player.controlScheme == GgjController.eInputDevice.KeyboardArrows)
+                        player.gameObject.SetActive(!player.gameObject.activeSelf);
+                }
+                else if (Input.GetKeyDown(KeyCode.Alpha9) && Gamepad.all.Count > 0)
+                {
+                    if (player.controlScheme == GgjController.eInputDevice.ControllerOne)
+                        player.gameObject.SetActive(!player.gameObject.activeSelf);
+                }
+                else if (Input.GetKeyDown(KeyCode.Alpha0) && Gamepad.all.Count > 1)
+                {
+                    if (player.controlScheme == GgjController.eInputDevice.ControllerTwo)
+                        player.gameObject.SetActive(!player.gameObject.activeSelf);
+                }
+            }
         }
     }
 }

@@ -225,6 +225,11 @@ Transform:
   - {fileID: 593263671}
   m_Father: {fileID: 510347503}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
+--- !u!1 &202039436 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 420885649689620665, guid: af09eab58a172f44cbdafaefc5286649, type: 3}
+  m_PrefabInstance: {fileID: 1066862468}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &202039437 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3604979430554962891, guid: af09eab58a172f44cbdafaefc5286649, type: 3}
@@ -598,6 +603,8 @@ MonoBehaviour:
   - {fileID: 1394969459}
   - {fileID: 1580378392}
   - {fileID: 1751428580}
+  - {fileID: 202039436}
+  - {fileID: 1599666593}
   minimalFov: 5
   maxFov: 90
   lerpTime: 0.5
@@ -7658,7 +7665,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 2
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9716981, g: 0.1283375, b: 0.1283375, a: 1}
   m_Intensity: 16
   m_Range: 25
   m_SpotAngle: 30
@@ -8497,6 +8504,11 @@ GameObject:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3604979430554962891, guid: af09eab58a172f44cbdafaefc5286649, type: 3}
   m_PrefabInstance: {fileID: 241136145}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1599666593 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 420885649689620665, guid: af09eab58a172f44cbdafaefc5286649, type: 3}
+  m_PrefabInstance: {fileID: 538139126}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1599666594 stripped
 Transform:

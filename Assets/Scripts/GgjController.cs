@@ -95,8 +95,13 @@ public class GgjController : MonoBehaviour
         var particles = GetComponentsInChildren<ParticleSystem>();
         foreach (var particle in particles)
         {
+            if(particle.name.Contains("Hit"))
+                continue;
+
             var main = particle.main;
             main.startColor = teamSettings.teamColor;
+            // var colorOverLifetime = particle.colorOverLifetime;
+            // colorOverLifetime.color = teamSettings.teamColor;
         }
     }
 
@@ -229,7 +234,7 @@ public class GgjController : MonoBehaviour
             {
                 direction = ballPos - playerPos;
                 direction.Normalize();
-                Debug.Log("Auto-aiming at ball, adjusted angle: " + angleToBall);
+                //Debug.Log("Auto-aiming at ball, adjusted angle: " + angleToBall);
             }
         }
 
