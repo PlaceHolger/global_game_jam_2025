@@ -55,7 +55,12 @@ public class GgjController : MonoBehaviour
             renderer.material = teamSettings.teamMaterial;
         }*/
         var feetRender = GetComponentInChildren<SkinnedMeshRenderer> ();
-        if(feetRender) feetRender.material.color = teamSettings.teamColor;
+        if(feetRender) 
+            feetRender.material.color = teamSettings.teamColor;
+        
+        var light = GetComponentInChildren<Light> ();
+        if(light) 
+            light.color = teamSettings.teamColor;
     }
 
     void Update()
