@@ -49,11 +49,11 @@ public class GgjController : MonoBehaviour
 
     void UpdateColors()
     {
-        var allRenderer = GetComponentsInChildren<MeshRenderer>();
+        /*var allRenderer = GetComponentsInChildren<MeshRenderer>();
         foreach (var renderer in allRenderer)
         {
             renderer.material = teamSettings.teamMaterial;
-        }
+        }*/
         var feetRender = GetComponentInChildren<SkinnedMeshRenderer> ();
         if(feetRender) feetRender.material.color = teamSettings.teamColor;
     }
