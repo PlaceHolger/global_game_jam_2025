@@ -21,6 +21,10 @@ public class GgjController : MonoBehaviour
     private bool isDashing;
     private float dashEndTime;
     private float lastDashTime;
+    
+    public Vector3 dashPushBoxSize = new(1.0f, 1.0f, 1.0f);
+    public float dashPushForceBall = 8.0f;
+    public float dashPushForcePlayer = 30.0f;
 
     void Start()
     {
@@ -90,6 +94,25 @@ public class GgjController : MonoBehaviour
 
     void StartDash(Vector3 direction)
     {
+        // Perform a box sweep in the direction of the dash
+        var hitColliders = Physics.BoxCastAll(transform.position, dashPushBoxSize / 2, direction);
+        
+        foreach (var hit in hitColliders)
+        {
+            // Check if the hit object is the ball or another player
+            if (hit.collider.CompareTag("Ball") || hit.collider.CompareTag("Player"))
+            {
+                // Apply an additional force push to the hit object
+                Rigidbody hitRb = hit.collider.GetComponent<Rigidbody>();
+                if (hitRb)
+                {
+                    Vector3 pushDirection = direction.normalized;
+                    float dashPushForce = hit.collider.CompareTag("Ball") ? dashPushForceBall : dashPushForcePlayer;
+                    hitRb.AddForce(pushDirection * dashPushForce, ForceMode.Impulse);
+                }
+            }
+        }
+        
         isDashing = true;
         dashEndTime = Time.time + dashTime;
         lastDashTime = Time.time;
