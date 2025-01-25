@@ -179,6 +179,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goal (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4301270035283397100, guid: d716273d6fcf13e48ad865aa77cf885e, type: 3}
+      propertyPath: currentTeam
+      value: 
+      objectReference: {fileID: 11400000, guid: 6406dfd4d14d89b42bf599ff1e78fc9e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -486,6 +490,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6954799700456032385, guid: af09eab58a172f44cbdafaefc5286649, type: 3}
       propertyPath: player
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6954799700456032385, guid: af09eab58a172f44cbdafaefc5286649, type: 3}
+      propertyPath: teamSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 6406dfd4d14d89b42bf599ff1e78fc9e, type: 2}
+    - target: {fileID: 6954799700456032385, guid: af09eab58a172f44cbdafaefc5286649, type: 3}
+      propertyPath: controlScheme
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7786144305806663159, guid: af09eab58a172f44cbdafaefc5286649, type: 3}
@@ -1673,6 +1685,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goal (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4301270035283397100, guid: d716273d6fcf13e48ad865aa77cf885e, type: 3}
+      propertyPath: currentTeam
+      value: 
+      objectReference: {fileID: 11400000, guid: 6406dfd4d14d89b42bf599ff1e78fc9e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7172,6 +7188,10 @@ PrefabInstance:
       value: Goal
       objectReference: {fileID: 0}
     - target: {fileID: 4301270035283397100, guid: d716273d6fcf13e48ad865aa77cf885e, type: 3}
+      propertyPath: currentTeam
+      value: 
+      objectReference: {fileID: 11400000, guid: 26eadfd54b9f24e489f691036d27df8c, type: 2}
+    - target: {fileID: 4301270035283397100, guid: d716273d6fcf13e48ad865aa77cf885e, type: 3}
       propertyPath: respawnPosition1
       value: 
       objectReference: {fileID: 572531669}
@@ -7502,6 +7522,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goal (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4301270035283397100, guid: d716273d6fcf13e48ad865aa77cf885e, type: 3}
+      propertyPath: currentTeam
+      value: 
+      objectReference: {fileID: 11400000, guid: 26eadfd54b9f24e489f691036d27df8c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7664,6 +7688,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72d629f7512a6dd46ad99ebbd8e172f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartPosition: StartPosition
 --- !u!1 &1883257720
 GameObject:
   m_ObjectHideFlags: 0
@@ -7802,6 +7827,59 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 982227758}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1937896111
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1937896113}
+  - component: {fileID: 1937896112}
+  m_Layer: 0
+  m_Name: Globals
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1937896112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937896111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6b6e4f49343418382ee54a8b5e581f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnResetAfterGoal:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSwitchGoals:
+    m_PersistentCalls:
+      m_Calls: []
+  TeamData:
+  - {fileID: 11400000, guid: 26eadfd54b9f24e489f691036d27df8c, type: 2}
+  - {fileID: 11400000, guid: 6406dfd4d14d89b42bf599ff1e78fc9e, type: 2}
+--- !u!4 &1937896113
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937896111}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.431692, y: -1.6234058, z: -5.039121}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2073370453
 GameObject:
@@ -8003,6 +8081,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 70de955ce0d6c9e4d8f4a1650fa69373, type: 2}
+    - target: {fileID: 6954799700456032385, guid: af09eab58a172f44cbdafaefc5286649, type: 3}
+      propertyPath: teamSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 26eadfd54b9f24e489f691036d27df8c, type: 2}
     - target: {fileID: 7786144305806663159, guid: af09eab58a172f44cbdafaefc5286649, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -8026,3 +8108,4 @@ SceneRoots:
   - {fileID: 1726741095}
   - {fileID: 1006011756}
   - {fileID: 521591069}
+  - {fileID: 1937896113}
