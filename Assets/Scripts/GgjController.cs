@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering;
@@ -19,6 +20,8 @@ public class GgjController : MonoBehaviour
     public TeamSettings teamSettings;
     public UnityEvent OnDashStart;
     public UnityEvent OnDashEnd;
+
+    public List<GameObject> alignToDash;
 
     private Rigidbody rb;
     private bool isDashing;
@@ -93,6 +96,14 @@ public class GgjController : MonoBehaviour
         {
             if (move == Vector3.zero)
                 move.y = 1; //dash up forward if no direction
+            else
+            {
+                foreach (GameObject alignObject in alignToDash)
+                {
+                    alignObject.transform.LookAt(transform.position + move);
+                }
+                Debug.DrawLine(transform.position, transform.position + move * 3f, Color.red, 10f);
+            }
             StartDash(move);
         }
 

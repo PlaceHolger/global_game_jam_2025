@@ -46,7 +46,7 @@ public class CameraController : MonoBehaviour
 
         Vector3 projectedPosition = Vector3.ProjectOnPlane(focusCenter, Vector3.forward);
         Vector3 desiredPosition = new Vector3(projectedPosition.x, projectedPosition.y + (projectedPosition.z - startPosition.z) * 0.5f, startPosition.z);
-        camera.transform.position = Vector3.Lerp(camera.transform.position, desiredPosition, 0.5f);
+        camera.transform.position = Vector3.Lerp(camera.transform.position, desiredPosition, lerpTime);
 
         Vector3 minDirection = minPositions - camera.transform.position;
         Vector3 maxDirection = maxPositions - camera.transform.position;
@@ -62,12 +62,12 @@ public class CameraController : MonoBehaviour
         float openingAngle = Mathf.Max(minimalFov, Mathf.Min(maxFov, Mathf.Max(openingAngleWidth * 0.75f, openingAngleHeight * 0.75f)));
 
         float newFov = Mathf.Lerp(openingAngle, camera.fieldOfView, lerpTime);
-        if (float.IsNaN(newFov))
+        if (!float.IsNaN(newFov))
         {
-            newFov = minimalFov;
+            camera.fieldOfView = newFov;
+            Quaternion lookAtQuaternion = Quaternion.LookRotation(focusCenter - camera.transform.position, Vector3.up);
+            camera.transform.rotation = Quaternion.Slerp(camera.transform.rotation, lookAtQuaternion, lerpTime);
+
         } 
-        
-        camera.fieldOfView = newFov;
-        camera.transform.LookAt(focusCenter);
     }
 }
