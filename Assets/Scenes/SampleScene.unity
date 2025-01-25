@@ -429,6 +429,10 @@ PrefabInstance:
       value: Player2
       objectReference: {fileID: 0}
     - target: {fileID: 420885649689620665, guid: af09eab58a172f44cbdafaefc5286649, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 420885649689620665, guid: af09eab58a172f44cbdafaefc5286649, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
@@ -7552,7 +7556,7 @@ GameObject:
   - component: {fileID: 1751428582}
   - component: {fileID: 1751428581}
   - component: {fileID: 1751428586}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ball
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -8065,6 +8069,18 @@ PrefabInstance:
     - target: {fileID: 3604979430554962891, guid: af09eab58a172f44cbdafaefc5286649, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6954799700456032385, guid: af09eab58a172f44cbdafaefc5286649, type: 3}
+      propertyPath: dashPushBoxSize.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6954799700456032385, guid: af09eab58a172f44cbdafaefc5286649, type: 3}
+      propertyPath: dashPushBoxSize.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6954799700456032385, guid: af09eab58a172f44cbdafaefc5286649, type: 3}
+      propertyPath: dashPushBoxSize.z
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

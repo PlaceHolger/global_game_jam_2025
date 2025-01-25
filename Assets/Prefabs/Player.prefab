@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8348677257000256321}
   - component: {fileID: 6954799700456032385}
   - component: {fileID: 3300297550158030289}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -162,9 +162,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  dashPushBoxSize: {x: 0.8, y: 0.8, z: 1.1}
+  dashPushBoxSize: {x: 0.8, y: 0.8, z: 3}
   dashPushForceBall: 12
   dashPushForcePlayer: 75
+  dashPushLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!54 &3300297550158030289
 Rigidbody:
   m_ObjectHideFlags: 0

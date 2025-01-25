@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -25,6 +26,12 @@ public class GgjController : MonoBehaviour
     public Vector3 dashPushBoxSize = new(1.0f, 1.0f, 1.0f);
     public float dashPushForceBall = 8.0f;
     public float dashPushForcePlayer = 30.0f;
+    
+    private Vector3 lastDashDirection;
+    private Quaternion lastDashOrientation;
+    private bool didDashPushHit;
+    
+    public LayerMask dashPushLayerMask;
 
     void Start()
     {
@@ -76,6 +83,8 @@ public class GgjController : MonoBehaviour
             {
                 isDashing = false;
                 OnDashEnd.Invoke();
+                if(!didDashPushHit)
+                    DoForcePush(move);
             }
         }
         else
@@ -96,25 +105,9 @@ public class GgjController : MonoBehaviour
 
     void StartDash(Vector3 direction)
     {
-        // Perform a box sweep in the direction of the dash
-        var hitColliders = Physics.BoxCastAll(transform.position, dashPushBoxSize / 2, direction);
-        
-        foreach (var hit in hitColliders)
-        {
-            // Check if the hit object is the ball or another player
-            if (hit.collider.CompareTag("Ball") || hit.collider.CompareTag("Player"))
-            {
-                // Apply an additional force push to the hit object
-                Rigidbody hitRb = hit.collider.GetComponent<Rigidbody>();
-                if (hitRb)
-                {
-                    Vector3 pushDirection = direction.normalized;
-                    float dashPushForce = hit.collider.CompareTag("Ball") ? dashPushForceBall : dashPushForcePlayer;
-                    hitRb.AddForce(pushDirection * dashPushForce, ForceMode.Impulse);
-                }
-            }
-        }
-        
+        didDashPushHit = false;
+        DoForcePush(direction);
+
         isDashing = true;
         dashEndTime = Time.time + dashTime;
         lastDashTime = Time.time;
@@ -122,5 +115,45 @@ public class GgjController : MonoBehaviour
         rb.angularVelocity = Vector3.zero;
         rb.linearVelocity = direction.normalized * dashSpeed;
         OnDashStart.Invoke();
+    }
+
+    private void DoForcePush(Vector3 direction)
+    {
+        // Perform a box sweep in the direction of the dash
+        //var hitColliders = Physics.BoxCastAll(transform.position, dashPushBoxSize / 2, direction);
+        var checkPosOffset = direction.normalized * (dashPushBoxSize.z / 2);
+        var hitColliders = Physics.OverlapBox(transform.position + checkPosOffset, dashPushBoxSize / 2, Quaternion.LookRotation(checkPosOffset), dashPushLayerMask);
+        
+        lastDashDirection = transform.position + checkPosOffset;
+        lastDashOrientation = Quaternion.LookRotation(checkPosOffset);
+        
+        foreach (var hit in hitColliders)
+        {
+            // Check if the hit object is the ball or another player
+            if (hit.CompareTag("Ball") || hit.CompareTag("Player"))
+            {
+                if(hit.gameObject == gameObject)
+                    continue;
+                // Apply an additional force push to the hit object
+                Rigidbody hitRb = hit.GetComponent<Rigidbody>();
+                if (hitRb)
+                {
+                    Vector3 pushDirection = direction.normalized;
+                    float dashPushForce = hit.CompareTag("Ball") ? dashPushForceBall : dashPushForcePlayer;
+                    hitRb.AddForce(pushDirection * dashPushForce, ForceMode.Impulse);
+                    didDashPushHit = true;
+                }
+            }
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        //draw a box in the direction of the dash
+        if(lastDashDirection == Vector3.zero)
+            return;
+        Gizmos.color = Color.red;
+        Gizmos.matrix = Matrix4x4.TRS(lastDashDirection, lastDashOrientation, dashPushBoxSize);
+        Gizmos.DrawWireCube(Vector3.zero, Vector3.one);
     }
 }
