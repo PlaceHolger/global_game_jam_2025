@@ -495,7 +495,7 @@ PrefabInstance:
     - target: {fileID: 6954799700456032385, guid: af09eab58a172f44cbdafaefc5286649, type: 3}
       propertyPath: teamSettings
       value: 
-      objectReference: {fileID: 11400000, guid: 26eadfd54b9f24e489f691036d27df8c, type: 2}
+      objectReference: {fileID: 11400000, guid: 6406dfd4d14d89b42bf599ff1e78fc9e, type: 2}
     - target: {fileID: 6954799700456032385, guid: af09eab58a172f44cbdafaefc5286649, type: 3}
       propertyPath: controlScheme
       value: 1
