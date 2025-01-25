@@ -83,6 +83,8 @@ public class GgjController : MonoBehaviour
 
         if (dashPressed && Time.time >= lastDashTime + dashCooldown)
         {
+            if (move == Vector3.zero)
+                move.y = 1; //dash up forward if no direction
             StartDash(move);
         }
 
@@ -90,7 +92,10 @@ public class GgjController : MonoBehaviour
         {
             if (Time.time < dashEndTime)
             {
-                rb.linearVelocity = move.normalized * dashSpeed;
+                if (move == Vector3.zero)
+                    rb.linearVelocity = Vector3.up * 0.6f * dashSpeed;
+                else 
+                    rb.linearVelocity = move.normalized * dashSpeed;
             }
             else
             {
