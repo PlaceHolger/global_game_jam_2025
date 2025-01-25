@@ -9,6 +9,8 @@ public class CameraController : MonoBehaviour
 
     [SerializeField] private float minimalFov = 5f;
 
+    [SerializeField] private float maxFov = 90f;
+    
     [SerializeField] 
     [Range(0.01f, 1f)] 
     private float lerpTime = 0.5f;
@@ -24,7 +26,6 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        camera = Camera.main;
         Vector3 minPositions = focusObjects.Count > 0 ? focusObjects[0].transform.position : Vector3.zero;
         Vector3 maxPositions = focusObjects.Count > 0 ? focusObjects[0].transform.position : Vector3.zero;;
         
@@ -58,9 +59,15 @@ public class CameraController : MonoBehaviour
         float openingAngleHeight = Mathf.Acos(Vector3.Dot(minDirectionFlat.normalized, maxDirectionFlat.normalized)) * Mathf.Rad2Deg;
         openingAngleHeight *= camera.aspect;
 
-        float openingAngle = Mathf.Max(minimalFov, Mathf.Max(openingAngleWidth * 0.75f, openingAngleHeight * 0.75f));
+        float openingAngle = Mathf.Max(minimalFov, Mathf.Min(maxFov, Mathf.Max(openingAngleWidth * 0.75f, openingAngleHeight * 0.75f)));
 
-        camera.fieldOfView = Mathf.Lerp(openingAngle, camera.fieldOfView, 0.5f);
+        float newFov = Mathf.Lerp(openingAngle, camera.fieldOfView, lerpTime);
+        if (float.IsNaN(newFov))
+        {
+            newFov = minimalFov;
+        } 
+        
+        camera.fieldOfView = newFov;
         camera.transform.LookAt(focusCenter);
     }
 }
