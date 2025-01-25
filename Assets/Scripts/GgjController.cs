@@ -1,11 +1,13 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
 using UnityEngine.Serialization;
+using UnityEngine.InputSystem;
 
 public class GgjController : MonoBehaviour
 {
-    public enum eInputDevice { KeyboardWASD, KeyboardArrows } //todo: gamepads
+    public enum eInputDevice { KeyboardWASD, KeyboardArrows, ControllerOne, ControllerTwo }
 
     [FormerlySerializedAs("player")]
     public eInputDevice controlScheme = eInputDevice.KeyboardWASD;
@@ -49,11 +51,6 @@ public class GgjController : MonoBehaviour
 
     void UpdateColors()
     {
-        /*var allRenderer = GetComponentsInChildren<MeshRenderer>();
-        foreach (var renderer in allRenderer)
-        {
-            renderer.material = teamSettings.teamMaterial;
-        }*/
         var feetRender = GetComponentInChildren<SkinnedMeshRenderer> ();
         if(feetRender) 
             feetRender.material.color = teamSettings.teamColor;
@@ -79,6 +76,17 @@ public class GgjController : MonoBehaviour
             move.x = Input.GetKey(KeyCode.LeftArrow) ? -1 : Input.GetKey(KeyCode.RightArrow) ? 1 : 0;
             move.z = Input.GetKey(KeyCode.UpArrow) ? 1 : Input.GetKey(KeyCode.DownArrow) ? -1 : 0;
             dashPressed = Input.GetKeyDown(KeyCode.RightShift);
+        }
+        if ( controlScheme == eInputDevice.ControllerOne ) {
+            Vector2 axis = Gamepad.all [ 0 ].leftStick.ReadValue ();
+            move.x = axis.x;
+            move.z = axis.y;
+            dashPressed = Gamepad.all [ 0 ].aButton.ReadValue()>0f;
+        } else if ( controlScheme == eInputDevice.ControllerTwo ) {
+            Vector2 axis = Gamepad.all [ 1 ].leftStick.ReadValue ();
+            move.x = axis.x;
+            move.z = axis.y;
+            dashPressed = Gamepad.all [ 1 ].aButton.ReadValue () > 0f;
         }
 
         if (dashPressed && Time.time >= lastDashTime + dashCooldown)
