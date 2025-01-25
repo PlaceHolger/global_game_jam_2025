@@ -8,7 +8,7 @@ public class ViewAlign : MonoBehaviour
         _cam = Camera.main.transform;
     }
 
-    void Update(){
+    void LateUpdate(){
         transform.LookAt(_cam.position, Vector3.up);
     }
 }
