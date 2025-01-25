@@ -127,6 +127,9 @@ public class GgjController : MonoBehaviour
 
     private void DoForcePush(Vector3 direction)
     {
+        if(direction.sqrMagnitude < 0.01f)
+            return; //no force push if no direction
+        
         // Perform a box sweep in the direction of the dash
         //var hitColliders = Physics.BoxCastAll(transform.position, dashPushBoxSize / 2, direction);
         var checkPosOffset = direction.normalized * (dashPushBoxSize.z / 2);
