@@ -26,11 +26,14 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        Vector3 minPositions = focusObjects.Count > 0 ? focusObjects[0].transform.position : Vector3.zero;
-        Vector3 maxPositions = focusObjects.Count > 0 ? focusObjects[0].transform.position : Vector3.zero;;
+        //init with min/max values
+        Vector3 minPositions = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
+        Vector3 maxPositions = new Vector3(float.MinValue, float.MinValue, float.MinValue);
         
         foreach (GameObject focusObject in focusObjects)
         {
+            if(focusObject.activeSelf == false)
+                continue;
             Vector3 focusObjectPosition = focusObject.transform.position;
             
             minPositions.x = Mathf.Min(focusObjectPosition.x, minPositions.x);
