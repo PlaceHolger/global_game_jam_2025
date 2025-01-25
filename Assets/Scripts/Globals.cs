@@ -7,9 +7,9 @@ public class Globals : MonoBehaviour
 {
     public static UnityEvent OnResetAfterGoal = new UnityEvent();
     public static UnityEvent OnSwitchGoals = new UnityEvent();
-    public static UnityEvent OnRotate = new UnityEvent();
+    public static UnityEvent OnRotateZ = new UnityEvent();
 
-    public List<TeamSettings> TeamData;
+    public List<TeamSettings> TeamData = new List<TeamSettings>();
             
     private static Globals s_Instance = null;
 

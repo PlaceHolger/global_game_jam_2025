@@ -13,18 +13,24 @@ public class Goal : MonoBehaviour
     private void OnEnable()
     {
         Globals.OnSwitchGoals.AddListener(OnSwitchGoals);
+        Globals.OnRotateZ.AddListener(OnSwitchGoals);
         UpdateColors();
     }
     
     private void OnDisable()
     {
         Globals.OnSwitchGoals.RemoveListener(OnSwitchGoals);
+        Globals.OnRotateZ.RemoveListener(OnSwitchGoals);
     }
 
     private void OnSwitchGoals()
     {
-        currentTeam = Globals.GetInstance().GetOtherTeam(currentTeam.team);
-        UpdateColors();
+        var newTeam = Globals.GetInstance().GetOtherTeam(currentTeam.team);
+        if (newTeam)
+        {
+            currentTeam = newTeam;
+            UpdateColors();
+        }
     }
 
     private void UpdateColors()

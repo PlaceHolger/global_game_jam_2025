@@ -19,26 +19,33 @@ public class FieldMover2 : MonoBehaviour
         return m_CurrentTween.isAlive;
     }
     
-    public void RotateAround(Vector3 axis) //will rotate by rotationStep degrees
+    public bool RotateAround(Vector3 axis) //will rotate by rotationStep degrees
     {
         if(IsRotating())
-            return;
+            return false;
         Vector3 target = transform.eulerAngles + new Vector3(axis.x * rotationStep, axis.y * rotationStep, axis.z * rotationStep);
         m_CurrentTween = Tween.EulerAngles(transform, transform.eulerAngles, target, rotationTime);
+        return true;
     }
     
-    public void RotateZ(bool isClockwise)
+    public bool RotateZ(bool isClockwise)
     {
-        RotateAround(Vector3.forward * (isClockwise ? 1 : -1));
+        if(RotateAround(Vector3.forward * (isClockwise ? 1 : -1)))
+        {
+            Globals.OnRotateZ.Invoke();
+            return true;
+        }
+
+        return false;
     }
     
-    public void RotateX(bool isClockwise)
+    public bool RotateX(bool isClockwise)
     {
-        RotateAround(Vector3.right * (isClockwise ? 1 : -1));
+        return RotateAround(Vector3.right * (isClockwise ? 1 : -1));
     }
     
-    public void RotateY(bool isClockwise)
+    public bool RotateY(bool isClockwise)
     {
-        RotateAround(Vector3.up * (isClockwise ? 1 : -1));
+        return RotateAround(Vector3.up * (isClockwise ? 1 : -1));
     }
 }

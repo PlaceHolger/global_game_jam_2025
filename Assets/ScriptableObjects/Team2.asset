@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37ae587df93546749eceffccfb0dd2d8, type: 3}
   m_Name: Team2
   m_EditorClassIdentifier: 
+  team: 1
   teamName: Team2
   teamColor: {r: 0.2784314, g: 0.36078432, b: 0.7137255, a: 0}
   teamMaterial: {fileID: 2100000, guid: 5d9542a9c59011a4cb57452554ac5ee0, type: 2}
