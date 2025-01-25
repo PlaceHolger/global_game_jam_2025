@@ -4,11 +4,14 @@ using UnityEngine;
 public class KillPlane : MonoBehaviour
 {
     public Transform respawnPosition;
-    public List<GameObject> objectsToRespawn;
+    // public List<GameObject> objectsToRespawn;
+    
+    public string PlayerTag = "Player";
+    public string BallTag = "Ball";
 
     void OnTriggerEnter(Collider other)
     {
-        if (objectsToRespawn.Contains(other.gameObject))
+        if (other.CompareTag(PlayerTag) || other.CompareTag(BallTag))
         {
             other.gameObject.transform.position = respawnPosition.position;
             //reset rigidbody velocity

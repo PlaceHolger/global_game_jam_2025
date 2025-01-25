@@ -16,11 +16,11 @@ public class CameraController : MonoBehaviour
     private float lerpTime = 0.5f;
     
     private Vector3 startPosition;
-    private Camera camera;
+    private Camera controlledCamera;
     
     private void Awake()
     {
-        camera = Camera.main;       
+        controlledCamera = Camera.main;       
         startPosition = transform.position;
     }
 
@@ -46,10 +46,10 @@ public class CameraController : MonoBehaviour
 
         Vector3 projectedPosition = Vector3.ProjectOnPlane(focusCenter, Vector3.forward);
         Vector3 desiredPosition = new Vector3(projectedPosition.x, projectedPosition.y + (projectedPosition.z - startPosition.z) * 0.5f, startPosition.z);
-        camera.transform.position = Vector3.Lerp(camera.transform.position, desiredPosition, lerpTime);
+        controlledCamera.transform.position = Vector3.Lerp(controlledCamera.transform.position, desiredPosition, lerpTime);
 
-        Vector3 minDirection = minPositions - camera.transform.position;
-        Vector3 maxDirection = maxPositions - camera.transform.position;
+        Vector3 minDirection = minPositions - controlledCamera.transform.position;
+        Vector3 maxDirection = maxPositions - controlledCamera.transform.position;
         Vector3 minDirectionFlat = minDirection.ProjectOntoPlane(Vector3.up);
         Vector3 maxDirectionFlat = maxDirection.ProjectOntoPlane(Vector3.up);
         float openingAngleWidth = Mathf.Acos(Vector3.Dot(minDirectionFlat.normalized, maxDirectionFlat.normalized)) * Mathf.Rad2Deg;
@@ -57,16 +57,16 @@ public class CameraController : MonoBehaviour
         minDirectionFlat = minDirection.ProjectOntoPlane(Vector3.left);
         maxDirectionFlat = maxDirection.ProjectOntoPlane(Vector3.left);
         float openingAngleHeight = Mathf.Acos(Vector3.Dot(minDirectionFlat.normalized, maxDirectionFlat.normalized)) * Mathf.Rad2Deg;
-        openingAngleHeight *= camera.aspect;
+        openingAngleHeight *= controlledCamera.aspect;
 
         float openingAngle = Mathf.Max(minimalFov, Mathf.Min(maxFov, Mathf.Max(openingAngleWidth * 0.75f, openingAngleHeight * 0.75f)));
 
-        float newFov = Mathf.Lerp(openingAngle, camera.fieldOfView, lerpTime);
+        float newFov = Mathf.Lerp(openingAngle, controlledCamera.fieldOfView, lerpTime);
         if (!float.IsNaN(newFov))
         {
-            camera.fieldOfView = newFov;
-            Quaternion lookAtQuaternion = Quaternion.LookRotation(focusCenter - camera.transform.position, Vector3.up);
-            camera.transform.rotation = Quaternion.Slerp(camera.transform.rotation, lookAtQuaternion, lerpTime);
+            controlledCamera.fieldOfView = newFov;
+            Quaternion lookAtQuaternion = Quaternion.LookRotation(focusCenter - controlledCamera.transform.position, Vector3.up);
+            controlledCamera.transform.rotation = Quaternion.Slerp(controlledCamera.transform.rotation, lookAtQuaternion, lerpTime);
 
         } 
     }
