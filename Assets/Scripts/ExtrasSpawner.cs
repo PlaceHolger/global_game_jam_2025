@@ -28,7 +28,6 @@ public class ExtrasSpawner : MonoBehaviour
         if (objectCollected && Time.time >= nextSpawnTime)
         {
             SpawnObject();
-            ScheduleNextSpawn();
         }
     }
 
@@ -48,7 +47,8 @@ public class ExtrasSpawner : MonoBehaviour
         GameObject objectToSpawn = objectsToSpawn[Random.Range(0, objectsToSpawn.Count)];
         Transform spawnPosition = spawnPositions[Random.Range(0, spawnPositions.Count)];
 
-        GameObject spawnedObject = Instantiate(objectToSpawn, spawnPosition.position, spawnPosition.rotation);
+        GameObject spawnedObject = Instantiate(objectToSpawn, spawnPosition);
+        spawnedObject.transform.position = spawnPosition.position;
         spawnedObject.GetComponent<Collectible>().OnCollected.AddListener(OnObjectCollected);
 
         objectCollected = false;
@@ -57,5 +57,6 @@ public class ExtrasSpawner : MonoBehaviour
     private void OnObjectCollected()
     {
         objectCollected = true;
+        ScheduleNextSpawn();
     }
 }
