@@ -209,6 +209,7 @@ MonoBehaviour:
         m_CallState: 2
   alignToDash:
   - {fileID: 7582227654794853840}
+  positionIndicator: {fileID: 2948060048336927993}
   dashPushBoxSize: {x: 3, y: 3, z: 6}
   dashPushForceBall: 12
   dashPushForcePlayer: 75
