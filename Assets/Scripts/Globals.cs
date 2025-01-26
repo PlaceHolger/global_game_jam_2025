@@ -9,6 +9,7 @@ public class Globals : MonoBehaviour
     public static UnityEvent OnResetAfterGoal = new UnityEvent();
     public static UnityEvent OnSwitchGoals = new UnityEvent();
     public static UnityEvent OnRotateZ = new UnityEvent();
+    public static UnityEvent<TeamSettings.eTeam> OnGoal = new UnityEvent<TeamSettings.eTeam>();
 
     public List<TeamSettings> TeamData = new List<TeamSettings>();
             
@@ -47,6 +48,10 @@ public class Globals : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void Goal(TeamSettings.eTeam team ) {
+        OnGoal?.Invoke ( team );
     }
 
     public void Update()

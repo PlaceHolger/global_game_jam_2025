@@ -6,8 +6,6 @@ public class Goal : MonoBehaviour
     [SerializeField]
     private string BallTag = "Ball";
     
-    public UnityEvent OnGoal;
-    
     public TeamSettings currentTeam;
 
     private void OnEnable()
@@ -47,8 +45,9 @@ public class Goal : MonoBehaviour
     {
         if (other.CompareTag(BallTag))
         {
-            Globals.GetInstance().ResetAfterGoal();
-            OnGoal.Invoke();
+            Debug.Log ( "GOAL!" );
+            Globals.GetInstance ().Goal ( currentTeam.team );
+            Globals.GetInstance().ResetAfterGoal(); 
         }
     }
 }

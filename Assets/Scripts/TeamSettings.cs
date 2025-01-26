@@ -3,12 +3,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "TeamData", menuName = "ScriptableObjects/TeamSettings", order = 1)]
 public class TeamSettings : ScriptableObject
 {
+    [System.Serializable]
     public enum eTeam
     {
-        Team1,
-        Team2,
-        Team3,
-        Team4
+        Unknown = 0,
+        Team1 = 1,
+        Team2 = 2,
+        Team3 = 3,
+        Team4 = 4
     }
     
     public eTeam team;
