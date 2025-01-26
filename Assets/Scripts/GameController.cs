@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static TeamSettings;
 
 public class GameController : MonoBehaviour
@@ -11,6 +12,12 @@ public class GameController : MonoBehaviour
         public int currentScore;
         public TextMeshProUGUI scoreDisplay;
     }
+
+    [SerializeField]
+    private float _matchTime = 180f;
+
+    [SerializeField]
+    private float _finishTime = 5f;
 
     [SerializeField]
     public Teamscore[] teamscores;
@@ -29,6 +36,10 @@ public class GameController : MonoBehaviour
 
     [SerializeField]
     private GgjController _playerFour;
+
+    [SerializeField]
+    private TextMeshProUGUI _timeDisplay;
+
 
     private void Start () {
         SetTeamColors ();
@@ -68,6 +79,22 @@ public class GameController : MonoBehaviour
                 teamscores [ i ].scoreDisplay.text = teamscores [ i ].currentScore.ToString();
             }   
         }
+    }
+
+    private void Update () {
+        if ( _matchTime > 0f ) {
+            _matchTime -= Time.deltaTime;
+            if ( _matchTime > 0f ) {
+                _timeDisplay.text = "Time : " + Mathf.CeilToInt ( _matchTime );
+            } else {
+                _timeDisplay.text = "Game End!";
+                Invoke ( nameof(BackToMenu), _finishTime ); 
+            }
+        }
+    }
+
+    public void BackToMenu () {
+        SceneManager.LoadScene ( 0 );
     }
 
 }

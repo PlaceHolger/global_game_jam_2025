@@ -117,6 +117,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89be2bdecd19d7c4782e1c45bc761b8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _matchTime: 180
+  _finishTime: 5
   teamscores:
   - team: {fileID: 11400000, guid: 26eadfd54b9f24e489f691036d27df8c, type: 2}
     currentScore: 0
@@ -129,6 +131,7 @@ MonoBehaviour:
   _playerTwo: {fileID: 0}
   _playerThree: {fileID: 0}
   _playerFour: {fileID: 0}
+  _timeDisplay: {fileID: 2912719860732842729}
 --- !u!1 &828096755017792934
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,7 +149,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1800876665458310510
 RectTransform:
   m_ObjectHideFlags: 0
