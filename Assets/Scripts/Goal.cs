@@ -8,6 +8,8 @@ public class Goal : MonoBehaviour
     
     public TeamSettings currentTeam;
 
+    public float RotateOnGoalChance = 0.5f;
+
     private void OnEnable()
     {
         Globals.OnSwitchGoals.AddListener(OnSwitchGoals);
@@ -48,6 +50,22 @@ public class Goal : MonoBehaviour
            // Debug.Log ( "GOAL!" );
             Globals.GetInstance ().Goal ( currentTeam.team );
             Globals.GetInstance().ResetAfterGoal(); 
+            
+            if (Random.value < RotateOnGoalChance)
+            {
+                FieldMover2 fieldMover = FindAnyObjectByType<FieldMover2>();
+                if (fieldMover)
+                {
+                    if(currentTeam.team == TeamSettings.eTeam.Team1)
+                    {
+                        fieldMover.RotateZ(true);
+                    }
+                    else
+                    {
+                        fieldMover.RotateZ(false);
+                    }
+                }
+            }
         }
     }
 }
