@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ControlSchemeSetup
   m_EditorClassIdentifier: 
   playerOneControl: 0
-  playerTwoControl: 1
-  playerThreeControl: 2
+  playerTwoControl: 2
+  playerThreeControl: 1
   playerFourControl: 3
