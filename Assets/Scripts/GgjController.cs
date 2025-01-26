@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.Serialization;
 using UnityEngine.InputSystem;
 
@@ -27,6 +28,8 @@ public class GgjController : MonoBehaviour
 
     public List<GameObject> alignToDash;
 
+    public GameObject positionIndicator;
+
     private Rigidbody rb;
     private bool isDashing;
     private float dashEndTime;
@@ -48,11 +51,18 @@ public class GgjController : MonoBehaviour
     public float hitBallAutoAimAngle = 38.0f;
     public GameObject ball;
 
+    private float initialLightIntensity;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         UpdateColors();
         ball = GameObject.FindGameObjectWithTag("Ball");
+
+        if (positionIndicator.TryGetComponent(out Light pointLight))
+        {
+            initialLightIntensity = pointLight.intensity;
+        }
 
         //check if control scheme is set to controller and if so, check if a controller is connected
         if (controlScheme == eInputDevice.ControllerOne && Gamepad.all.Count < 1)
@@ -189,6 +199,18 @@ public class GgjController : MonoBehaviour
                 }
 
                 rb.linearVelocity += move * (speed * Time.deltaTime);
+            }
+        }
+        
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity))
+        {
+            positionIndicator.transform.position = hit.point + Vector3.up * 0.5f;
+            if (positionIndicator.TryGetComponent(out Light pointLight))
+            {
+                float lightStrength = Mathf.Clamp((5f - hit.distance) / 4f, 0.1f, 1f);
+                pointLight.intensity = initialLightIntensity * lightStrength;
+
             }
         }
     }

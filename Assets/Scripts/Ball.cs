@@ -1,8 +1,12 @@
+using System;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
     public string StartPosition = "StartPosition";
+    
+    private float initialLightIntensity;
+    public GameObject positionIndicator;
     
     void OnEnable()
     {
@@ -12,6 +16,29 @@ public class Ball : MonoBehaviour
     private void OnDisable()
     {
         Globals.OnResetAfterGoal.RemoveListener(ResetBall);
+    }
+
+    private void Start()
+    {
+        if (positionIndicator.TryGetComponent(out Light pointLight))
+        {
+            initialLightIntensity = pointLight.intensity;
+        }
+    }
+
+    private void Update()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity))
+        {
+            positionIndicator.transform.position = hit.point + Vector3.up * 0.5f;
+            if (positionIndicator.TryGetComponent(out Light pointLight))
+            {
+                float lightStrength = Mathf.Clamp((5f - hit.distance) / 4f, 0.1f, 1f);
+                pointLight.intensity = initialLightIntensity * lightStrength;
+
+            }
+        }
     }
 
     private void ResetBall()
