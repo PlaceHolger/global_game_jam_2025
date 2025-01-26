@@ -1848,7 +1848,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46dc39944cb6da54dacb192ef1b5a2f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnPosition: {fileID: 0}
+  respawnPosition: {fileID: 1687005969}
   PlayerTag: Player
   BallTag: Ball
 --- !u!64 &829826384
@@ -1935,7 +1935,7 @@ Transform:
   m_GameObject: {fileID: 829826382}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -35.2, z: 0}
+  m_LocalPosition: {x: 0, y: -64.3, z: 0}
   m_LocalScale: {x: 222, y: 2, z: 222}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7808,6 +7808,11 @@ GameObject:
 --- !u!1 &1599666593 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1268069492299517233, guid: ece75691cf42e0644a5aeacf2af38758, type: 3}
+  m_PrefabInstance: {fileID: 312617280}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1687005969 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1509411034733140826, guid: ece75691cf42e0644a5aeacf2af38758, type: 3}
   m_PrefabInstance: {fileID: 312617280}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1735589852

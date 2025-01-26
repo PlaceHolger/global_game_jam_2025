@@ -34,10 +34,10 @@ public class GameController : MonoBehaviour
     }
 
     void EvaluateGoal( TeamSettings.eTeam team ) {
-        Debug.Log ( "GOAL CONTROLLER!" );
+        //Debug.Log ( "GOAL CONTROLLER!" );
         for ( int i = 0; i< teamscores.Length; i++ )
         {
-            Debug.Log ( "SHIT " + teamscores [ i ].team.team + " vs " + team );
+            //Debug.Log ( "SHIT " + teamscores [ i ].team.team + " vs " + team );
             if ( teamscores[ i ].team.team != team ) {
                 teamscores [ i ].currentScore++;
                 teamscores [ i ].scoreDisplay.text = teamscores [ i ].currentScore.ToString();

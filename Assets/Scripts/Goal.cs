@@ -45,7 +45,7 @@ public class Goal : MonoBehaviour
     {
         if (other.CompareTag(BallTag))
         {
-            Debug.Log ( "GOAL!" );
+           // Debug.Log ( "GOAL!" );
             Globals.GetInstance ().Goal ( currentTeam.team );
             Globals.GetInstance().ResetAfterGoal(); 
         }
