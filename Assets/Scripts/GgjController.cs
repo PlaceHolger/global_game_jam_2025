@@ -8,10 +8,10 @@ public class GgjController : MonoBehaviour
 {
     public enum eInputDevice
     {
-        KeyboardWASD,
-        KeyboardArrows,
-        ControllerOne,
-        ControllerTwo
+        KeyboardWASD = 0,
+        KeyboardArrows = 1,
+        ControllerOne = 2,
+        ControllerTwo = 3
     }
 
     [FormerlySerializedAs("player")] public eInputDevice controlScheme = eInputDevice.KeyboardWASD;
@@ -57,24 +57,24 @@ public class GgjController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         UpdateColors();
         ball = GameObject.FindGameObjectWithTag("Ball");
+        gameObject.SetActive ( CheckControlAvailability() );
 
         if (positionIndicator.TryGetComponent(out Light pointLight))
         {
             initialLightIntensity = pointLight.intensity;
         }
+    }
 
+    public bool CheckControlAvailability () {
         //check if control scheme is set to controller and if so, check if a controller is connected
-        if (controlScheme == eInputDevice.ControllerOne && Gamepad.all.Count < 1)
-        {
-            Debug.LogWarning("ControllerOne selected but no controller connected, disable player");
-            gameObject.SetActive(false);
+        if ( controlScheme == eInputDevice.ControllerOne && Gamepad.all.Count < 1 ) {
+            Debug.LogWarning ( "ControllerOne selected but no controller connected, disable player" );
+            return false;
+        } else if ( controlScheme == eInputDevice.ControllerTwo && Gamepad.all.Count < 2 ) {
+            Debug.LogWarning ( "ControllerTwo selected but no controller connected, disable player" );
+            return false;
         }
-
-        else if (controlScheme == eInputDevice.ControllerTwo && Gamepad.all.Count < 2)
-        {
-            Debug.LogWarning("ControllerTwo selected but no controller connected, disable player");
-            gameObject.SetActive(false);
-        }
+        return true;
     }
 
     public void OnBeingHit(Vector3 hitDir, float hitStrength, float knockOutMulti = 1.0f)

@@ -36,8 +36,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - Ball
+  - CornerHelper
   - 
   m_SortingLayers:
   - name: Default

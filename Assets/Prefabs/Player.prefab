@@ -215,7 +215,7 @@ MonoBehaviour:
   dashPushForcePlayer: 75
   dashPushLayerMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 536871168
   knockHitTime: 0.5
   hitBallAutoAimAngle: 38
   ball: {fileID: 0}
