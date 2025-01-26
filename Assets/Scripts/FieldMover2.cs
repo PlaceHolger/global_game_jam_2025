@@ -1,5 +1,9 @@
+using System;
 using UnityEngine;
 using PrimeTween;
+using UnityEngine.Events;
+using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class FieldMover2 : MonoBehaviour
 {
@@ -7,6 +11,12 @@ public class FieldMover2 : MonoBehaviour
     public float rotationStep = 90.0f;
     
     private Tween m_CurrentTween;
+    private bool m_IsRotating = false;
+    
+    public UnityEvent OnRotationZ90 = new UnityEvent();
+    public UnityEvent OnRotationZ180 = new UnityEvent();
+    public UnityEvent OnRotationZ270 = new UnityEvent();
+    [FormerlySerializedAs("OnRotationZ360")] public UnityEvent OnRotationZ0 = new UnityEvent();
 
     public void DoRandomRotateZ()
     {
@@ -17,6 +27,45 @@ public class FieldMover2 : MonoBehaviour
     public bool IsRotating()
     {
         return m_CurrentTween.isAlive;
+    }
+
+    private void Update()
+    {
+        if(m_CurrentTween.isAlive)
+        {
+            m_IsRotating = true;
+        }
+        else
+        {
+            if (m_IsRotating)
+            {
+                //so we were rotating and now we are not, fire the correct event
+                if (Mathf.Approximately(transform.eulerAngles.z, 90))
+                    OnRotationZ90.Invoke();
+                else if (Mathf.Approximately(transform.eulerAngles.z, 180))
+                    OnRotationZ180.Invoke();
+                else if (Mathf.Approximately(transform.eulerAngles.z, 270))
+                    OnRotationZ270.Invoke();
+                else if (Mathf.Approximately(transform.eulerAngles.z, 0) || Mathf.Approximately(transform.eulerAngles.z, 360))
+                    OnRotationZ0.Invoke();
+                m_IsRotating = false;
+            }
+        }
+    }
+
+    public void SetRotationZ(float z)
+    {
+        if(IsRotating())
+            return;
+        
+        //check which direction is shorter, we dont want to rotate 270 degrees if we can rotate 90
+        float angle = z - transform.eulerAngles.z;
+        if (angle > 180)
+            z -= 360;
+        else if (angle < -180)
+            z += 360;
+        
+        m_CurrentTween = Tween.EulerAngles(transform, transform.eulerAngles, new Vector3(0, 0, z), rotationTime);
     }
     
     public bool RotateAround(Vector3 axis) //will rotate by rotationStep degrees
