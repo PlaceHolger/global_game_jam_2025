@@ -124,6 +124,11 @@ MonoBehaviour:
   - team: {fileID: 11400000, guid: 6406dfd4d14d89b42bf599ff1e78fc9e, type: 2}
     currentScore: 0
     scoreDisplay: {fileID: 3484192986306556634}
+  _controlSetup: {fileID: 11400000, guid: 7c28a45f3e10fd64da0e2a372263ed4f, type: 2}
+  _playerOne: {fileID: 0}
+  _playerTwo: {fileID: 0}
+  _playerThree: {fileID: 0}
+  _playerFour: {fileID: 0}
 --- !u!1 &828096755017792934
 GameObject:
   m_ObjectHideFlags: 0
